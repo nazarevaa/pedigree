@@ -64,7 +64,6 @@
         Информации нет
       </div>
     </div>
-    <div class="person-card__status-indicator" :class="genderClass"></div>
   </div>
 </template>
 
@@ -148,14 +147,6 @@ export default {
     },
     parents (){
       return this.filteredPersons(person => person.children && person.children.includes(this.person.id))
-    },
-    genderClass () {
-      if (this.needHide) {
-        return `person-card__status-indicator__hide-gender`
-      }
-      else {
-        return `person-card__status-indicator__${this.person.gender.toLowerCase()}`
-      }
     }
   }
 }
@@ -177,25 +168,6 @@ export default {
     font-size: 10px;
     padding-bottom: 20px;
     color: black;
-  }
-
-  &__status-indicator {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin-top: 10px;
-
-    &__female {
-      background-color: #ACFFE6;
-    }
-
-    &__male {
-      background-color: #ACFFB4;
-    }
-
-    &__hide-gender {
-      background-color: gray;
-    }
   }
 }
 
