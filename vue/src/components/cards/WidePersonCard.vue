@@ -6,6 +6,7 @@
     <div class="person-widecard__description">
       <div class="person-widecard__description__fullname">
         <h1>{{ fullName }}</h1>
+        <div class="person-widecard__status-indicator" :class="genderClass"></div>
       </div>
       <div class="person-widecard__description__dates">
         <span>{{ person.birth_date }}</span>
@@ -13,7 +14,6 @@
       </div>
       <span class="person-widecard__description__id">id: {{ person.id }}</span>
     </div>
-    <div class="person-widecard__status-indicator" :class="genderClass"></div>
   </div>
 </template>
   
@@ -56,7 +56,7 @@ export default {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    margin-top: 20px;
+    margin-bottom: 5px;
 
     &__female {
       background-color: #ACFFE6;
@@ -76,6 +76,7 @@ export default {
 
     &__fullname {
       display: flex;
+      flex-direction: row;
       align-items: center;
       gap: 10px;
     }
