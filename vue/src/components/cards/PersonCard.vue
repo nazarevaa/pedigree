@@ -4,7 +4,10 @@
       <PhotoPreview size="large" :photo="photo"/>
     </div>
     <div>
-      <h1 id="info-section">{{ fullName }}</h1>
+      <div class="person-card__fullname">
+        <h1 id="info-section">{{ fullName }}</h1>
+        <div class="person-card__status-indicator" :class="genderClass"></div>
+      </div>
       <span class="person-card__dates">{{ birthDate }}</span>
       <span v-if="dieDate" class="person-card__dates"> - {{ dieDate }}</span>
 
@@ -147,6 +150,9 @@ export default {
     },
     parents (){
       return this.filteredPersons(person => person.children && person.children.includes(this.person.id))
+    },
+    genderClass () {
+      return `person-card__status-indicator__${this.person.gender.toLowerCase()}`
     }
   }
 }
@@ -168,6 +174,28 @@ export default {
     font-size: 10px;
     padding-bottom: 20px;
     color: black;
+  }
+
+  &__fullname {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  &__status-indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+
+    &__female {
+      background-color: #ACFFE6;
+    }
+
+    &__male {
+      background-color: #ACFFB4;
+    }
   }
 }
 
