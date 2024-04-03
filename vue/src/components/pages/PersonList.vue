@@ -63,10 +63,10 @@ export default {
       'filteredPersons'
     ]),
     filterRemovedData: {
-      get(){
-        this.filterRemoved.toString()
+      get () {
+        return this.filterRemoved.toString()
       },
-      set(value){
+      set (value) {
         this.filterRemoved = value == true
       }
     },
