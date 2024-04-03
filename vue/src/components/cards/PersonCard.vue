@@ -21,7 +21,7 @@
             </template>
           </PopOver>
         </div>
-        <div v-else>Информации нет</div>
+        <p v-else>Нет родителей</p>
       </div>
 
       <h2 id="childs-section">Дети</h2>
@@ -89,16 +89,15 @@
 </template>
 
 <script>
-import WeddingItem from '../parts/WeddingItem.vue'
-import EducationItem from '../parts/EducationItem.vue'
-import MilitaryItem from '../parts/MilitaryItem.vue'
-import PhotoPreview from '../ui/PhotoPreview.vue'
-import RelateButton from '@/components/ui/RelateButton.vue'
-import PopOver from '../ui/PopOver.vue'
-import PersonPreviewCard from './PersonPreviewCard.vue'
-import { formatPersonName } from '@/services/formatPersonName'
-import { mapGetters } from 'vuex'
-import { maskDatetime, defaultImage } from '@/utils/mask'
+import WeddingsList from '../parts/WeddingsList.vue';
+import MilitaryList from '../parts/MilitaryList.vue';
+import PhotoPreview from '../ui/PhotoPreview.vue';
+import RelateButton from '@/components/ui/RelateButton.vue';
+import PopOver from '../ui/PopOver.vue';
+import PersonPreviewCard from './PersonPreviewCard.vue';
+import { formatPersonName } from '@/services/formatPersonName';
+import { mapGetters } from 'vuex';
+import { maskDatetime, defaultImage } from '@/utils/mask';
 
 export default {
   name: 'PersonCard',
@@ -176,14 +175,11 @@ export default {
       }
       return defaultImage
     },
-    parents () {
-      return this.getAvailablePersons.filter((person) => {
-        return person.children && person.children.includes(this.person.id)
-      })
+    parents (){
+      return this.filteredPersons(person => person.children && person.children.includes(this.person.id))
     },
     genderClass () {
-      const gender = this.person.gender || ''
-      return `person-card__status-indicator__${ gender.toLowerCase() }`
+      return `person-card__status-indicator__${this.person.gender.toLowerCase()}`
     }
   }
 }
@@ -213,11 +209,12 @@ export default {
     align-items: center;
     gap: 10px;
   }
-
+  
   &__status-indicator {
     width: 15px;
     height: 15px;
     border-radius: 50%;
+    margin-bottom: 5px;
 
     &__female {
       background-color: #ACFFE6;
