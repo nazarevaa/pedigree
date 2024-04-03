@@ -105,14 +105,14 @@
             <button
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => moveItem('children', index, 'up')" 
+              @click="() => swapElements('children', index, true)" 
             >
-              ⬆
+              ▲
             </button>
             <button
               v-show="index !== value.children.length - 1"
               class="person-page__button" 
-              @click="() => moveItem('children', index, 'down')" 
+              @click="() => swapElements('children', index, false)" 
             >
               ⬇
             </button>
@@ -146,16 +146,16 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => moveItem('weddings', index, 'up')" 
+              @click="() => swapElements('weddings', index, true)" 
             >
-              ⬆
+              ▲
             </button>
             <button 
               v-show="index !== value.weddings.length - 1"
               class="person-page__button" 
-              @click="() => moveItem('weddings', index, 'down')" 
+              @click="() => swapElements('weddings', index, false)" 
             >
-              ⬇
+              ▼
             </button>
             <button class="person-page__button" @click="() => removeWeddingForm(index)">
               ✖
@@ -187,16 +187,16 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => moveItem('militaries', index, 'up')"
+              @click="() => swapElements('militaries', index, true)"
             >
-              ⬆
+              ▲
             </button>
             <button 
               v-show="index !== value.militaries.length - 1"
               class="person-page__button" 
-              @click="() => moveItem('militaries', index, 'down')" 
+              @click="() => swapElements('militaries', index, false)" 
             >
-              ⬇
+              ▼
             </button>
             <button class="person-page__button" @click="() => removeMilitaryForm(index)">
               ✖
@@ -227,16 +227,16 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => moveItem('educations', index, 'up')" 
+              @click="() => swapElements('educations', index, true)" 
             >
-              ⬆
+              ▲
             </button>
             <button 
               v-show="index !== value.educations.length - 1"
               class="person-page__button" 
-              @click="() => moveItem('educations', index, 'down')" 
+              @click="() => swapElements('educations', index, false)" 
             >
-              ⬇
+              ▼
             </button>
             <button @click="() => removeEducationForm(index)" class="person-page__button">
               ✖
@@ -267,16 +267,16 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => moveItem('works', index, 'up')" 
+              @click="() => swapElements('works', index, true)" 
             >
-              ⬆
+              ▲
             </button>
             <button 
               v-show="index !== value.works.length - 1"
               class="person-page__button" 
-              @click="() =>  moveItem('works', index, 'down')" 
+              @click="() =>  swapElements('works', index, false)" 
             >
-              ⬇
+              ▼
             </button>
             <button @click="() => removeWorkForm(index)" class="person-page__button">
               ✖
@@ -584,17 +584,14 @@ export default {
       newValue.works.splice(index, 1)
       this.$emit('change', newValue)
     },
-    moveItem(valueName, index, direction) {
-      const newValue = [...this.value[valueName]]
-      const temp = newValue[index]
-      if (direction === 'up') {
-        newValue[index] = newValue[index - 1]
-        newValue[index - 1] = temp
-      } else if (direction === 'down') {
-        newValue[index] = newValue[index + 1]
-        newValue[index + 1] = temp
+    swapElements (arrayName, index, up) {
+      const array = [...this.value[arrayName]]
+      if (up) {
+        [array[index - 1], array[index]] = [array[index], array[index - 1]]
+      }else {
+        [array[index], array[index + 1]] = [array[index + 1], array[index]]
       }
-      this.$emit('change', { ...this.value, [valueName]: newValue })
+      this.$emit('change', { ...this.value, [arrayName]: array })
     }
   }
 }
