@@ -55,8 +55,8 @@
 </template>
 
 <script>
-import PopOver from '../ui/PopOver.vue'
-import InputHelper from '../ui/InputHelper.vue'
+import PopOver from '@/components/ui/PopOver.vue'
+import InputHelper from '@/components/ui/InputHelper.vue'
 import { parseDateString } from '@/services/datePickerOptions'
 
 export default {
@@ -125,7 +125,7 @@ export default {
       }
     },
     hints: {
-      get() {
+      get () {
         return ['Бакалавриат', 'Магистратура', 'Аспирантура']
       }
     },
@@ -158,7 +158,7 @@ export default {
         ...param
       })
     },
-    selectHint(hint) {
+    selectHint (hint) {
       this.type = hint
     }
   }

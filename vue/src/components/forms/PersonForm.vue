@@ -361,10 +361,10 @@ export default {
     },
     maidenName: {
       get () {
-        return this.value.maidenName;
+        return this.value.maidenName
       },
       set (value) {
-        this.emitFormData({ maidenName: value });
+        this.emitFormData({ maidenName: value })
       }
     },
     gender: {
@@ -584,7 +584,7 @@ export default {
       newValue.works.splice(index, 1)
       this.$emit('change', newValue)
     },
-    moveItem(valueName, index, direction) {
+    moveItem (valueName, index, direction) {
       const newValue = [...this.value[valueName]]
       const temp = newValue[index]
       if (direction === 'up') {

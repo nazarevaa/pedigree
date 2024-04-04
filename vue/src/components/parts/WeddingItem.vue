@@ -1,8 +1,13 @@
 <template>
   <div class="wedding-card">
-    <div class="wedding-card__header">{{ fullName }}</div>
+    <div class="wedding-card__header">
+      {{ fullName }}
+    </div>
     <div class="wedding-card__grey-txt">
-      {{ wedding.startDate }}<template v-if="wedding.endDate"> - {{ wedding.endDate }}</template>
+      {{ wedding.startDate }}
+      <template v-if="wedding.endDate">
+        - {{ wedding.endDate }}
+      </template>
     </div>
   </div>
 </template>
