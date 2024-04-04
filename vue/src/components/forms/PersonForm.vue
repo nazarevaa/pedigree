@@ -122,6 +122,7 @@
           </div>
         </div>
         <ChildForm
+          ref="childForm"
           :value="child"
           :persons="childrens"
           @change="(child) => setChildForm(child, index)"
@@ -163,6 +164,7 @@
           </div>
         </div>
         <WeddingForm
+          ref="weddingForm"
           :value="wedding"
           :persons="partners"
           @change="(wedding) => setWeddingForm(wedding, index)"
@@ -204,6 +206,7 @@
           </div>
         </div>
         <MilitaryForm
+          ref="militaryForm"
           :value="military"
           @change="(military) => setMilitaryForm(military, index)"
         />
@@ -244,6 +247,7 @@
           </div>
         </div>
         <EducationForm
+          ref="educationForm"
           :value="education"
           @change="(education) => setEducationForm(education, index)"
         />
@@ -284,6 +288,7 @@
           </div>
         </div>
         <WorkForm
+          ref="workForm"
           :value="work"
           @change="(work) => setWorkForm(work, index)"
         />
@@ -490,6 +495,24 @@ export default {
         ...param
       })
     },
+    checkEmptyForms() {
+      const forms = [
+        ...this.$refs.militaryForm,
+        ...this.$refs.educationForm,
+        ...this.$refs.childForm,
+        ...this.$refs.weddingForm,
+        ...this.$refs.workForm
+      ]
+      forms.forEach(i => {
+        const r = i.validate()
+        if (r) {
+          this.$notify({
+            message: 'Ошибка: ' + r,
+            type: 'error'
+          });
+        }
+      })
+    },   
     formatDate (date) {
       if (date) {
         const getYear = parseInt(date.slice(6, 10))
