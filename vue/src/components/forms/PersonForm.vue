@@ -107,12 +107,12 @@
               class="person-page__button" 
               @click="() => moveItem('children', index, 'up')" 
             >
-              ▲
+              ⬆
             </button>
             <button
               v-show="index !== value.children.length - 1"
               class="person-page__button" 
-              @click="() => moveItem('children', index, 'down')"  
+              @click="() => moveItem('children', index, 'down')" 
             >
               ⬇
             </button>
@@ -149,14 +149,14 @@
               class="person-page__button" 
               @click="() => moveItem('weddings', index, 'up')" 
             >
-              ▲
+              ⬆
             </button>
             <button 
               v-show="index !== value.weddings.length - 1"
               class="person-page__button" 
               @click="() => moveItem('weddings', index, 'down')" 
             >
-              ▼
+              ⬇
             </button>
             <button class="person-page__button" @click="() => removeWeddingForm(index)">
               ✖
@@ -189,16 +189,16 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => moveItem('militaries', index, 'up')" 
+              @click="() => moveItem('militaries', index, 'up')"
             >
-              ▲
+              ⬆
             </button>
             <button 
               v-show="index !== value.militaries.length - 1"
               class="person-page__button" 
-              @click="() => moveItem('children', index, 'down')" 
+              @click="() => moveItem('militaries', index, 'down')" 
             >
-              ▼
+              ⬇
             </button>
             <button class="person-page__button" @click="() => removeMilitaryForm(index)">
               ✖
@@ -232,14 +232,14 @@
               class="person-page__button" 
               @click="() => moveItem('educations', index, 'up')" 
             >
-              ▲
+              ⬆
             </button>
             <button 
               v-show="index !== value.educations.length - 1"
               class="person-page__button" 
               @click="() => moveItem('educations', index, 'down')" 
             >
-              ▼
+              ⬇
             </button>
             <button @click="() => removeEducationForm(index)" class="person-page__button">
               ✖
@@ -273,14 +273,14 @@
               class="person-page__button" 
               @click="() => moveItem('works', index, 'up')" 
             >
-              ▲
+              ⬆
             </button>
             <button 
               v-show="index !== value.works.length - 1"
               class="person-page__button" 
-              @click="() => moveItem('works', index, 'down')" 
+              @click="() =>  moveItem('works', index, 'down')" 
             >
-              ▼
+              ⬇
             </button>
             <button @click="() => removeWorkForm(index)" class="person-page__button">
               ✖
@@ -497,11 +497,11 @@ export default {
     },
     checkEmptyForms() {
       const forms = [
-        //...this.$refs.militaryForm,
-        //...this.$refs.educationForm,
-        //...this.$refs.childForm,
-        //...this.$refs.weddingForm,
-        //...this.$refs.workForm
+        ...this.$refs.militaryForm,
+        ...this.$refs.educationForm,
+        ...this.$refs.childForm,
+        ...this.$refs.weddingForm,
+        ...this.$refs.workForm
       ]
       forms.forEach(i => {
         const r = i.validate()
