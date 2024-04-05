@@ -61,6 +61,7 @@
           v-for="(education, index) in person.educations"
           :key="index"
           :education="education"
+          :id="'education-section' + index"
         />
       </div>
       <div v-else class="person-card__information-text">
@@ -73,6 +74,7 @@
           v-for="(wedding, index) in person.weddings"
           :key="index"
           :wedding="wedding"
+          :id="'weddings-section' + index"
         />
       </div>
       <div v-else class="person-card__information-text">
@@ -85,6 +87,7 @@
           v-for="(military, index) in person.militaries"
           :key="index"
           :military="military"
+          :id="'military-section' + index"
         />
       </div>
       <div v-else class="person-card__information-text">
@@ -190,6 +193,17 @@ export default {
     genderClass () {
       const gender = this.person.gender || ''
       return `person-card__status-indicator__${ gender.toLowerCase() }`
+    }
+  },
+  methods: {
+    amountEducationItems () {
+      return this.person.educations.length
+    },
+    amountWeddingItems () {
+      return this.person.weddings.length
+    },
+    amountMilitaryItems () {
+      return this.person.militaries.length
     }
   }
 }
