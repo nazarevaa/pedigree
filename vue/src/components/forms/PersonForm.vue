@@ -105,14 +105,14 @@
             <button
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => swapElements('children', index, true)" 
+              @click="() => moveItem('children', index, 'up')" 
             >
               ▲
             </button>
             <button
               v-show="index !== value.children.length - 1"
               class="person-page__button" 
-              @click="() => swapElements('children', index, false)" 
+              @click="() => moveItem('children', index, 'down')"  
             >
               ⬇
             </button>
@@ -147,14 +147,14 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => swapElements('weddings', index, true)" 
+              @click="() => moveItem('weddings', index, 'up')" 
             >
               ▲
             </button>
             <button 
               v-show="index !== value.weddings.length - 1"
               class="person-page__button" 
-              @click="() => swapElements('weddings', index, false)" 
+              @click="() => moveItem('weddings', index, 'down')" 
             >
               ▼
             </button>
@@ -189,14 +189,14 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => swapElements('militaries', index, true)"
+              @click="() => moveItem('militaries', index, 'up')" 
             >
               ▲
             </button>
             <button 
               v-show="index !== value.militaries.length - 1"
               class="person-page__button" 
-              @click="() => swapElements('militaries', index, false)" 
+              @click="() => moveItem('children', index, 'down')" 
             >
               ▼
             </button>
@@ -230,14 +230,14 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => swapElements('educations', index, true)" 
+              @click="() => moveItem('educations', index, 'up')" 
             >
               ▲
             </button>
             <button 
               v-show="index !== value.educations.length - 1"
               class="person-page__button" 
-              @click="() => swapElements('educations', index, false)" 
+              @click="() => moveItem('educations', index, 'down')" 
             >
               ▼
             </button>
@@ -271,14 +271,14 @@
             <button 
               v-show="index !== 0"
               class="person-page__button" 
-              @click="() => swapElements('works', index, true)" 
+              @click="() => moveItem('works', index, 'up')" 
             >
               ▲
             </button>
             <button 
               v-show="index !== value.works.length - 1"
               class="person-page__button" 
-              @click="() =>  swapElements('works', index, false)" 
+              @click="() => moveItem('works', index, 'down')" 
             >
               ▼
             </button>
@@ -497,11 +497,11 @@ export default {
     },
     checkEmptyForms() {
       const forms = [
-        ...this.$refs.militaryForm,
-        ...this.$refs.educationForm,
-        ...this.$refs.childForm,
-        ...this.$refs.weddingForm,
-        ...this.$refs.workForm
+        //...this.$refs.militaryForm,
+        //...this.$refs.educationForm,
+        //...this.$refs.childForm,
+        //...this.$refs.weddingForm,
+        //...this.$refs.workForm
       ]
       forms.forEach(i => {
         const r = i.validate()
@@ -617,7 +617,7 @@ export default {
         newValue[index] = newValue[index + 1]
         newValue[index + 1] = temp
       }
-      this.$emit('change', { ...this.value, [arrayName]: array })
+      this.$emit('change', { ...this.value, [valueName]: newValue })
     }
   }
 }
