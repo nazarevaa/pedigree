@@ -1,7 +1,9 @@
 <template>
   <div class="scrolling-menu">
     <div v-for="(section, index) in sections" :key="index">
-      <button class="scrolling-menu__btn" @click="() => scrollToSection(section.id)">{{ section.title }}</button>
+      <button class="scrolling-menu__btn" @click="() => scrollToSection(section.id)">
+        {{ section.title }}
+      </button>
     </div>
   </div>
 </template>
