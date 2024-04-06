@@ -53,19 +53,19 @@ export default {
       ]
 
       sections.push({ id: 'education-section', title: 'Образование', chapter: true })
-      const amountEducationItems = this.$refs.PersonCard.person.educations.length || 0
+      const amountEducationItems = this.$refs.PersonCard.person.educations.length
       for(let ind = 0; ind < amountEducationItems; ind++) {
         sections.push({ id: 'education-section' + ind, title: 'Образование ' + (ind + 1), chapter: false })
       }
 
       sections.push({ id: 'weddings-section', title: 'Брачные союзы', chapter: true })
-      const amountWeddingItems = this.$refs.PersonCard.person.weddings.length || 0
+      const amountWeddingItems = this.$refs.PersonCard.person.weddings.length
       for(let ind = 0; ind < amountWeddingItems; ind++) {
         sections.push({ id: 'weddings-section' + ind, title: 'Брачный союз ' + (ind + 1), chapter: false })
       }
 
       sections.push({ id: 'military-section', title: 'Военная служба', chapter: true })
-      const amountMilitaryItems = this.$refs.PersonCard.person.militaries.length || 0
+      const amountMilitaryItems = this.$refs.PersonCard.person.militaries.length
       for(let ind = 0; ind < amountMilitaryItems; ind++) {
         sections.push({ id: 'military-section' + ind, title: 'Военная служба ' + (ind + 1), chapter: false })
       }
