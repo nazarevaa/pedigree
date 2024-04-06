@@ -194,17 +194,6 @@ export default {
       const gender = this.person.gender || ''
       return `person-card__status-indicator__${ gender.toLowerCase() }`
     }
-  },
-  methods: {
-    amountEducationItems () {
-      return this.person.educations.length
-    },
-    amountWeddingItems () {
-      return this.person.weddings.length
-    },
-    amountMilitaryItems () {
-      return this.person.militaries.length
-    }
   }
 }
 </script>

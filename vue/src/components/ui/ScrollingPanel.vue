@@ -3,8 +3,8 @@
     <div v-for="(section, index) in sections" :key="index">
       <button 
         class="scrolling-menu__btn" 
-        @click="() => scrollToSection(section.id)"
         :class="[section.chapter ? '' : 'scrolling-menu__btn__subsection']"
+        @click="() => scrollToSection(section.id)"
       >
         {{ section.title }}
       </button>
