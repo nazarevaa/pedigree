@@ -24,10 +24,10 @@ export default {
     NavigationPanel,
     ScrollingPanel
   },
-  data() {
+  data () {
     return {
-      isMounted: false
-    }
+      personCardRef: null
+    } 
   },
   computed: {
     ...mapGetters('persons', [
@@ -43,38 +43,37 @@ export default {
       return this.$route.params.id
     },
     sections () {
-      if(!this.isMounted) {
-        return []
-      }
       const sections = [
         { id: 'info-section', title: 'Общая информация', chapter: true },
         { id: 'parents-section', title: 'Родители', chapter: true },
         { id: 'childs-section', title: 'Дети', chapter: true },
       ]
 
-      sections.push({ id: 'education-section', title: 'Образование', chapter: true })
-      const amountEducationItems = this.$refs.PersonCard.person.educations.length
-      for(let ind = 0; ind < amountEducationItems; ind++) {
-        sections.push({ id: 'education-section' + ind, title: 'Образование ' + (ind + 1), chapter: false })
-      }
+      if (this.personCardRef) {
+        console.log(this.$refs.PersonCard.person)
+        sections.push({ id: 'education-section', title: 'Образование', chapter: true })
+        const amountEducationItems = this.$refs.PersonCard.person.educations.length
+        for(let ind = 0; ind < amountEducationItems; ind++) {
+          sections.push({ id: 'education-section' + ind, title: 'Образование ' + (ind + 1), chapter: false })
+        }
 
-      sections.push({ id: 'weddings-section', title: 'Брачные союзы', chapter: true })
-      const amountWeddingItems = this.$refs.PersonCard.person.weddings.length
-      for(let ind = 0; ind < amountWeddingItems; ind++) {
-        sections.push({ id: 'weddings-section' + ind, title: 'Брачный союз ' + (ind + 1), chapter: false })
-      }
+        sections.push({ id: 'weddings-section', title: 'Брачные союзы', chapter: true })
+        const amountWeddingItems = this.$refs.PersonCard.person.weddings.length
+        for(let ind = 0; ind < amountWeddingItems; ind++) {
+          sections.push({ id: 'weddings-section' + ind, title: 'Брачный союз ' + (ind + 1), chapter: false })
+        }
 
-      sections.push({ id: 'military-section', title: 'Военная служба', chapter: true })
-      const amountMilitaryItems = this.$refs.PersonCard.person.militaries.length
-      for(let ind = 0; ind < amountMilitaryItems; ind++) {
-        sections.push({ id: 'military-section' + ind, title: 'Военная служба ' + (ind + 1), chapter: false })
+        sections.push({ id: 'military-section', title: 'Военная служба', chapter: true })
+        const amountMilitaryItems = this.$refs.PersonCard.person.militaries.length
+        for(let ind = 0; ind < amountMilitaryItems; ind++) {
+          sections.push({ id: 'military-section' + ind, title: 'Военная служба ' + (ind + 1), chapter: false })
+        }
       }
-
       return sections
     }
   },
   mounted () {
-    this.isMounted = true
+    this.personCardRef = this.$refs.PersonCard
   }
 }
 </script>
