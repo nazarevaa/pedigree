@@ -3,7 +3,7 @@
     <ScrollingPanel :sections="sections" />
     <NavigationPanel />
     <section class="p-16">
-      <PersonCard :person="person" ref="PersonCard" />
+      <PersonCard :person="person" />
     </section>
   </PageLayout>
 </template>
@@ -24,11 +24,6 @@ export default {
     NavigationPanel,
     ScrollingPanel
   },
-  data () {
-    return {
-      personCardRef: null
-    } 
-  },
   computed: {
     ...mapGetters('persons', [
       'getPersonById'
@@ -43,37 +38,26 @@ export default {
       return this.$route.params.id
     },
     sections () {
-      const sections = [
-        { id: 'info-section', title: 'Общая информация', chapter: true },
-        { id: 'parents-section', title: 'Родители', chapter: true },
-        { id: 'childs-section', title: 'Дети', chapter: true },
+      return [
+        { id: 'info-section', title: 'Общая информация', subSection: this.generateSubsection('info', 'info-section','Информация')},
+        { id: 'parents-section', title: 'Родители', subSection: this.generateSubsection('parents', 'parent-section','Родитель') },
+        { id: 'childs-section', title: 'Дети', subSection: this.generateSubsection('children', 'child-section','Ребенок') },
+        { id: 'weddings-section', title: 'Брачные союзы', subSection: this.generateSubsection('weddings', 'weddings-section', 'Брачный союз') },
+        { id: 'military-section', title: 'Военная служба', subSection: this.generateSubsection('militaries', 'military-section', 'Военная служба') },
+        { id: 'education-section', title: 'Образование', subSection: this.generateSubsection('educations', 'education-section', 'Образование') }
       ]
-
-      if (this.personCardRef) {
-        console.log(this.$refs.PersonCard.person)
-        sections.push({ id: 'education-section', title: 'Образование', chapter: true })
-        const amountEducationItems = this.$refs.PersonCard.person.educations.length
-        for(let ind = 0; ind < amountEducationItems; ind++) {
-          sections.push({ id: 'education-section' + ind, title: 'Образование ' + (ind + 1), chapter: false })
-        }
-
-        sections.push({ id: 'weddings-section', title: 'Брачные союзы', chapter: true })
-        const amountWeddingItems = this.$refs.PersonCard.person.weddings.length
-        for(let ind = 0; ind < amountWeddingItems; ind++) {
-          sections.push({ id: 'weddings-section' + ind, title: 'Брачный союз ' + (ind + 1), chapter: false })
-        }
-
-        sections.push({ id: 'military-section', title: 'Военная служба', chapter: true })
-        const amountMilitaryItems = this.$refs.PersonCard.person.militaries.length
-        for(let ind = 0; ind < amountMilitaryItems; ind++) {
-          sections.push({ id: 'military-section' + ind, title: 'Военная служба ' + (ind + 1), chapter: false })
-        }
-      }
-      return sections
     }
   },
-  mounted () {
-    this.personCardRef = this.$refs.PersonCard
+  methods: {
+    generateSubsection (objectName, sectionName, title) {
+      if (this.person[objectName]) {
+        return this.person[objectName].map((item, index) => ({
+          id: `${sectionName}${index}`,
+          title: `${title} ${index + 1}`
+        }))
+      }
+      return []
+    }
   }
 }
 </script>
